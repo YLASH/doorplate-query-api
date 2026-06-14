@@ -1,31 +1,4 @@
 
-# 國泰產險｜數據暨人工智慧發展部資料科學科 實機測驗
-
-> **繳交者：** _徐宜琳_  
-> **繳交日期：** _2026/05/25_  
-> **Gitlab 專案：** _https://gitlab.com/YLASH/cathay-ds-project_
-
----
-
-## 📂 專案資料夾結構
-
-```text
-cathay-ds-project/
-├── task1/
-│   ├── crawler_main.ipynb          # Selenium 自動化爬蟲主程式
-│   └── 臺北市門牌大數據總表_已清洗.csv  # 爬取結果示範輸出
-├── task2/
-│   └── api.py                      # FastAPI 門牌查詢服務
-├── task3/
-│   ├── notifier.py                 # Discord Webhook 異常主動通報模組
-│   └── log_monitor.ipynb           # Regex 即時彩色日誌監控儀表板
-├── logs/                           # 系統動態生成的日誌目錄
-├── taiwan_address.db               # SQLite 資料庫（由爬蟲自動生成）
-├── requirements.txt                # 套件依賴清單
-└── README.md                       # 本說明文件
-```
-
----
 
 ## 🛠️ 環境準備
 
@@ -47,7 +20,7 @@ pip install -r requirements.txt
 
 ## 🚀 執行說明
 
-### 試題 1：自動化爬蟲
+## ：自動化爬蟲
 
 **目標：** 爬取[內政部戶政司門牌查詢網站](https://www.ris.gov.tw/app/portal/3053)，條件為臺北市各區、民國 114/09/01～114/11/30、編訂類別「門牌初編」。
 
@@ -75,13 +48,13 @@ pip install -r requirements.txt
 | 編釘日期 | 對應查詢區間內之日期 |
 | _(其他欄位依網頁實際擷取)_ | |
 
-**選用 Selenium 之技術評估：**
+**不選用 Selenium 之技術評估：**
 
 目標網站採動態渲染（JavaScript 驅動），頁面包含 iframe 巢狀結構與地圖熱區點擊互動，純 `requests` + BeautifulSoup 無法取得動態載入資料。Selenium 可完整模擬瀏覽器行為，精準操控表單下拉選單與日期輸入框，為本題最適合的爬蟲工具。
 
 ---
 
-### 試題 2：FastAPI 門牌查詢服務
+### 2：FastAPI 門牌查詢服務
 
 **執行方式：**
 >⚠️ 請務必在專案根目錄下執行以下指令，否則 試題3.notifier 中文模組路徑在 Linux / macOS 環境下會找不到。
@@ -126,7 +99,7 @@ uvicorn task2.api:app --host 0.0.0.0 --port 8000 --reload
 
 ---
 
-### 試題 3：Log 收集與異常通報
+### 3：Log 收集與異常通報
 
 #### 即時 Log 監控儀表板
 
@@ -155,32 +128,16 @@ DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/your_webhook_url"
 ### 執行結果示範
  
 #### 爬蟲執行 Log
-![crawler_log](screenshots/1_crawler_running.jpg)
- 
-#### CSV 輸出預覽
-![csv_output](screenshots/2_csv_output.jpg)
- 
-#### FastAPI 互動文件（/docs）
-![api_docs](screenshots/3_api_docs.jpg)
- 
-#### API 查詢結果
-![api_response](screenshots/4_api_response.jpg)
- 
-#### Discord 異常通報卡片
-![discord_alert](screenshots/5_discord_alert.jpg)
- 
-#### Log 監控儀表板
-![log_monitor](screenshots/6_log_monitor.jpg)
----
+
 ### 試題 4：系統架構圖
 
 ![系統架構圖](screenshots/系統架構圖.jpg)
 
 ---
 
-## ⭐ 加分題：自動化排程設計
+## ⭐ 延伸計畫
 
-### 方案：使用 APScheduler 進行定期爬取
+### 方案：自動執行
 
 在 `crawler_main.ipynb` 最後新增以下排程程式碼，即可讓爬蟲每日自動執行：
 
